@@ -12,5 +12,7 @@ const serverInitialize = (port) => {
     debug(chalk.bgRed("Error on server"));
   });
 };
-
+app.get((req, res) => {
+  res.status(200);
+});
 module.exports = serverInitialize;

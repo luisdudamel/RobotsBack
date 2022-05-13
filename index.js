@@ -7,7 +7,7 @@ const serverInitialize = require("./server/serverInitialize");
 (async () => {
   try {
     await connectToDatabase(process.env.MONGO_STRING);
-    await serverInitialize(process.env.SERVER_PORT);
+    await serverInitialize(process.env.SERVER_PORT || 4000);
   } catch {
     debug(chalk.red("Server initialization failed"));
   }
