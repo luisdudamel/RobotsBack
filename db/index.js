@@ -1,20 +1,22 @@
 require("dotenv").config();
-const debug = require("debug")("robots-database:root");
+const debug = require("debug")("robots:database:root");
 const chalk = require("chalk");
 
 const mongoose = require("mongoose");
 
-const connectToDatabase = () => {
-  mongoose.set("debug", true);
-  mongoose.connect(process.env.MONGO_STRING, (error) => {
-    if (error) {
-      debug(chalk.red("Error connecting"));
-      return;
-    }
+const connectToDatabase = (port) =>
+  new Promise((resolve, reject) => {
+    mongoose.set("debug", true);
+    mongoose.connect(port, (error) => {
+      if (error) {
+        debug(chalk.red("Error connecting: ", error.message));
+        reject();
+        return;
+      }
 
-    debug("Connected");
+      debug("Connected to database");
+      resolve();
+    });
   });
-};
-connectToDatabase();
 
 module.exports = connectToDatabase;
