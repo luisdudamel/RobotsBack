@@ -1,4 +1,4 @@
-const robotsMock = [
+const mockRobots = [
   {
     stats: {
       speed: "200",
@@ -23,4 +23,4 @@ const robotsMock = [
   },
 ];
 
-module.exports = { robotsMock };
+module.exports = { mockRobots };
