@@ -7,9 +7,10 @@ const error404NotFound = (req, res) => {
   debug(chalk.redBright(`A request did not find the endpoint requested`));
 };
 
-const general500Error = (req, res) => {
+// eslint-disable-next-line no-unused-vars
+const general500Error = (error, req, res, next) => {
   res.status(500).json({ msg: "General error ocurred" });
-  debug(chalk.redBright(`General error ocurred`));
+  debug(chalk.redBright(`General error ocurred with error ${error}`));
 };
 
 module.exports = { error404NotFound, general500Error };
