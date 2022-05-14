@@ -1,3 +1,4 @@
+require("dotenv").config();
 const { program } = require("commander");
 
 program.option("-p --port <port>", "Insert port for the API");

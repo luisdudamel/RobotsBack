@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --watchAll",
+    "test-coverage": "jest --coverage --watchall=false",
     "prepare": "husky install",
     "start": "node .",
     "nodemon-dev": "nodemon . -q"
@@ -38,5 +39,13 @@
     "mongoose": "^6.3.3",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.16"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "*.js",
+      "./**/*.js",
+      "!.eslintrc.js",
+      "!coverage/**/*.js"
+    ]
   }
 }
