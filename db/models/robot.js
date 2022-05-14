@@ -7,16 +7,14 @@ const RobotSchema = new Schema({
   image: {
     type: String,
   },
-  stats: {
-    speed: {
-      type: String,
-    },
-    stamina: {
-      type: String,
-    },
-    creationDate: {
-      type: String,
-    },
+  speed: {
+    type: String,
+  },
+  stamina: {
+    type: String,
+  },
+  creationDate: {
+    type: String,
   },
 });
 
