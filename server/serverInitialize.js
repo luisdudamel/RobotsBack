@@ -2,6 +2,7 @@ require("dotenv").config();
 const debug = require("debug")("robots:api-server:initialize");
 const chalk = require("chalk");
 const app = require("./index");
+const { robotsRouter } = require("./router/robotsRouter");
 
 const serverInitialize = (port) => {
   const server = app.listen(port, () => {
@@ -12,7 +13,5 @@ const serverInitialize = (port) => {
     debug(chalk.bgRed("Error on server"));
   });
 };
-app.get((req, res) => {
-  res.status(200);
-});
-module.exports = serverInitialize;
+app.use("/", robotsRouter);
+module.exports = { serverInitialize };

@@ -19,4 +19,4 @@ const connectToDatabase = (port) =>
     });
   });
 
-module.exports = connectToDatabase;
+module.exports = { connectToDatabase };

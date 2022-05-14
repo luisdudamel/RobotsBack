@@ -1,8 +1,8 @@
 require("dotenv").config();
 const debug = require("debug")("robots:root");
 const chalk = require("chalk");
-const connectToDatabase = require("./db/index");
-const serverInitialize = require("./server/serverInitialize");
+const { connectToDatabase } = require("./db/index");
+const { serverInitialize } = require("./server/serverInitialize");
 
 (async () => {
   try {
