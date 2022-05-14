@@ -19,13 +19,17 @@ describe("Given a error404NotFound function", () => {
 describe("Given a general500Error function", () => {
   describe("When its invoked with a response", () => {
     test("Then it should call the responses method status with a 500", () => {
+      const error = {
+        msg: "Mocked error",
+      };
+
       const res = {
         status: jest.fn().mockReturnThis(),
         json: () => {},
       };
       const expectedGeneralErrorStatus = 500;
 
-      general500Error(null, res);
+      general500Error(error, null, res);
 
       expect(res.status).toHaveBeenCalledWith(expectedGeneralErrorStatus);
     });

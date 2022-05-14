@@ -17,4 +17,5 @@ const serverInitialize = (port) => {
   });
 };
 app.use("/", robotsRouter);
+
 module.exports = { serverInitialize };
