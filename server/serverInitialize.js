@@ -9,8 +9,11 @@ const serverInitialize = (port) => {
     debug(chalk.greenBright(`Server is up and running on port ${port}`));
   });
 
-  server.on("error", () => {
-    debug(chalk.bgRed("Error on server"));
+  server.on("error", (error) => {
+    debug(chalk.bgRed("Error on server: "(error.message)));
+    if (error.code === "EADDRINUSE") {
+      debug(chalk.redBright(`Port ${port} already in use`));
+    }
   });
 };
 app.use("/", robotsRouter);
