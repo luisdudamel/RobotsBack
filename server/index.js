@@ -10,7 +10,8 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 
-app.get("/robots", robotsRouter);
+app.use("/robots", robotsRouter);
+
 app.use(error404NotFound);
 app.use(general500Error);
 
