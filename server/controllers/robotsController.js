@@ -10,4 +10,14 @@ const getRobots = async (req, res) => {
   );
 };
 
-module.exports = { getRobots };
+const deleteRobot = async (req, res) => {
+  const { idRobot } = req.params;
+  const robotDeleted = await Robot.findByIdAndDelete(idRobot);
+  res.status(200).json({ robotDeleted });
+
+  debug(
+    chalk.greenBright(`A delete request to robots database has been received`)
+  );
+};
+
+module.exports = { getRobots, deleteRobot };

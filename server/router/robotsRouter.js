@@ -1,9 +1,10 @@
 const express = require("express");
-const { getRobots } = require("../controllers/robotsController");
+const { getRobots, deleteRobot } = require("../controllers/robotsController");
 
 const robotsRouter = express.Router();
 
-robotsRouter.get("/robots", getRobots);
+robotsRouter.delete("/delete/:idRobot", deleteRobot);
+robotsRouter.get("/", getRobots);
 
 module.exports = {
   robotsRouter,
