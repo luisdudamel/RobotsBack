@@ -1,6 +1,8 @@
 const debug = require("debug")("robots:controller");
 const chalk = require("chalk");
+const jwt = require("jsonwebtoken");
 const Robot = require("../../db/models/robot");
+const User = require("../../db/models/users");
 
 const getRobots = async (req, res) => {
   const robots = await Robot.find();
@@ -20,4 +22,18 @@ const deleteRobot = async (req, res) => {
   );
 };
 
-module.exports = { getRobots, deleteRobot };
+const loginUser = async (req, res) => {
+  const { username, password } = req.body;
+
+  const user = await User.find({ password, username });
+
+  if (!user) {
+    res.status(401).json({ msg: "User not found" });
+    return;
+  }
+
+  const userToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
+  res.json(userToken);
+};
+
+module.exports = { getRobots, deleteRobot, loginUser };
