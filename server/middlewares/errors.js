@@ -9,7 +9,9 @@ const error404NotFound = (req, res) => {
 
 // eslint-disable-next-line no-unused-vars
 const general500Error = (error, req, res, next) => {
-  res.status(500).json({ msg: "General error ocurred" });
+  const statusCode = error.statusCode ?? 500;
+  const errorMessage = error.statusCode ? error.message : "General error";
+  res.status(statusCode).json(errorMessage);
   debug(chalk.redBright(`General error ocurred with error ${error}`));
 };
 

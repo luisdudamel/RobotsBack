@@ -12,9 +12,9 @@ const auth = (req, res, next) => {
 
     next();
   } catch {
-    const errorcito = new Error("Invalid token auth");
-    errorcito.statusCode = 401;
-    next(errorcito);
+    const invalidAuthError = new Error("Invalid token auth");
+    invalidAuthError.statusCode = 401;
+    next(invalidAuthError);
   }
 };
 module.exports = auth;

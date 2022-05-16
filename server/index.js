@@ -4,7 +4,6 @@ const cors = require("cors");
 const { default: helmet } = require("helmet");
 const { error404NotFound, general500Error } = require("./middlewares/errors");
 const { robotsRouter } = require("./router/robotsRouter");
-const auth = require("./router/auth");
 
 const app = express();
 
@@ -13,7 +12,7 @@ app.use(morgan("dev"));
 app.use(helmet());
 app.use(express.json());
 
-app.use("/robots", auth, robotsRouter);
+app.use("/robots", robotsRouter);
 
 app.use(error404NotFound);
 app.use(general500Error);
