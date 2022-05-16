@@ -14,13 +14,19 @@ const getRobots = async (req, res) => {
 
 const deleteRobot = async (req, res) => {
   const { idRobot } = req.params;
-  const robotDeleted = await Robot.findByIdAndDelete(idRobot);
-  res.status(200).json({ robotDeleted });
+  await Robot.findByIdAndDelete(idRobot);
+  res.status(200).json(idRobot);
 
   debug(
     chalk.greenBright(`A delete request to robots database has been received`)
   );
 };
+
+// const createRobot = async (req, res) => {
+// const robot = req.body
+// const
+
+// }
 
 const loginUser = async (req, res) => {
   const { username, password } = req.body;
