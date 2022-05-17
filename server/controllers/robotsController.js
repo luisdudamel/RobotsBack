@@ -1,8 +1,11 @@
 const debug = require("debug")("robots:controller");
 const chalk = require("chalk");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const Robot = require("../../db/models/robot");
 const User = require("../../db/models/users");
+const encryptPassword = require("../utils/encryptPassword");
+const { general500Error } = require("../middlewares/errors");
 
 const getRobots = async (req, res) => {
   const robots = await Robot.find();
@@ -22,24 +25,28 @@ const deleteRobot = async (req, res) => {
   );
 };
 
-// const createRobot = async (req, res) => {
-// const robot = req.body
-// const
-
-// }
-
-const loginUser = async (req, res) => {
+const loginUser = async (req, res, next) => {
   const { username, password } = req.body;
-
-  const user = await User.find({ password, username });
+  const user = await User.findOne({ username });
 
   if (!user) {
     res.status(401).json({ msg: "User not found" });
     return;
   }
 
-  const userToken = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
-  res.json(userToken);
+  const userDBData = {
+    name: user.name,
+    id: user.id,
+  };
+
+  const rightPassword = await bcrypt.compare(password, user.password);
+
+  if (!rightPassword) {
+    res.status(401).json({ msg: "User / Password incorrect" });
+  } else {
+    const userToken = jwt.sign({ userDBData }, process.env.JWT_SECRET);
+    res.json(userToken);
+  }
 };
 
 module.exports = { getRobots, deleteRobot, loginUser };
