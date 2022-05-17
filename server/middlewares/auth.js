@@ -2,10 +2,9 @@ const jwt = require("jsonwebtoken");
 
 const auth = (req, res, next) => {
   try {
-    const { usertoken } = req.headers;
+    const { authorization } = req.headers;
 
-    const token = usertoken.replace("Bearer ", "");
-
+    const token = authorization.replace("Bearer ", "");
     const { id } = jwt.verify(token, process.env.JWT_SECRET);
 
     req.userId = id;
