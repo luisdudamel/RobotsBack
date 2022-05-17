@@ -4,8 +4,6 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const Robot = require("../../db/models/robot");
 const User = require("../../db/models/users");
-const encryptPassword = require("../utils/encryptPassword");
-const { general500Error } = require("../middlewares/errors");
 
 const getRobots = async (req, res) => {
   const robots = await Robot.find();
@@ -25,7 +23,7 @@ const deleteRobot = async (req, res) => {
   );
 };
 
-const loginUser = async (req, res, next) => {
+const loginUser = async (req, res) => {
   const { username, password } = req.body;
   const user = await User.findOne({ username });
 
